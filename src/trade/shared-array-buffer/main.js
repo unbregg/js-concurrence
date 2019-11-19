@@ -16,8 +16,8 @@ syncForBankB[0] = 0;
 syncForCount[0] = 0;
 Lock.initialize(sab, lockLoc);
 
-const workerA = new Worker('./bank_a.js');
-const workerB = new Worker('./bank_b.js');
+const workerA = new Worker('./bank-a.js');
+const workerB = new Worker('./bank-b.js');
 workerA.postMessage(sab);
 workerB.postMessage(sab);
 
