@@ -8,8 +8,8 @@ const syncForBankA = new Int32Array(sab, 16, 1);
 const syncForBankB = new Int32Array(sab, 20, 1);
 const syncForCount = new Int32Array(sab, 24, 1);
 
-bankA[0] = 1000;
-bankB[0] = 1000;
+bankA[0] = 100000;
+bankB[0] = 100000;
 money[0] = 100;
 syncForBankA[0] = 0;
 syncForBankB[0] = 0;
@@ -21,12 +21,13 @@ const workerB = new Worker('./bank-b.js');
 workerA.postMessage(sab);
 workerB.postMessage(sab);
 
-// 同时发起十笔交易
-for (let i = 0; i < 10; i++) {
+// 同时发起100笔交易
+for (let i = 0; i < 100; i++) {
     const myWorker = new Worker('./payment.js');
     myWorker.onmessage = ({data}) => {
         // 交易完成后销毁线程
         if (data === 'done') {
+            console.log('支付成功');
             myWorker.terminate();
         }
     };

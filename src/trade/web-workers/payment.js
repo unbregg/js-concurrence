@@ -12,7 +12,6 @@ onmessage = function (e) {
             const success = function () {
                 count++;
                 if (count === 2) {
-                    console.log('交易完成');
                     count = 0;
                     postMessage({type: 'done'}, [portA, portB]);
                 }

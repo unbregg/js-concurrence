@@ -19,8 +19,5 @@ onmessage = function (e) {
     }
     Atomics.store(syncForCount, 0, 0);
     lock.unlock();
-    console.log('A', bankA[0]);
-    console.log('B', bankB[0]);
-    console.log('支付成功');
     postMessage('done');
 };

@@ -1,4 +1,4 @@
-let money = 1000;
+let money = 100000;
 let port;
 onmessage = function(e) {
     if (e.data.type === 'init') {

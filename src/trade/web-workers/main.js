@@ -7,18 +7,8 @@ const bankB = new Worker('./bank-b.js');
 bankA.postMessage({type: 'init'}, [channelA.port2]);
 bankB.postMessage({type: 'init'}, [channelB.port2]);
 
-/*let count = 0;
-const success = function () {
-    count++;
-    if (count === 2) {
-        console.log('交易完成');
-        count = 0;
-    }
-};
-channelA.port1.onmessage = success;
-channelB.port1.onmessage = success;*/
-// 同时发起十笔交易
-for (let i = 0; i < 10; i++) {
+// 同时发起100笔交易
+for (let i = 0; i < 100; i++) {
     const myWorker = new Worker('./payment.js');
     paymentWorkers.push(myWorker);
 }
@@ -26,6 +16,7 @@ for (let i = 0; i < 10; i++) {
 const onmessage = function(e){
     // 交易完成后销毁线程
     if (e.data.type === 'done') {
+        console.log('交易完成');
         paymentWorkers[0].terminate();
         paymentWorkers = paymentWorkers.slice(1);
         if(paymentWorkers[0]) {
